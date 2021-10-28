@@ -14,6 +14,13 @@ const routes = [
     name: 'About',
   
     component: () => import('../views/About.vue')
+  },
+  {
+
+    path:'/avalia',
+    name: 'Rate',
+
+    componente: () => import('../views/Rate.vue')
   }
 ]
 

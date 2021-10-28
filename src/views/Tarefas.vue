@@ -1,15 +1,72 @@
 <template>
-  <hello-world />
+  <div>
+    <v-col
+      cols="12"
+
+    >
+    <v-text-field
+        v-model="campoInput"
+        label="Criar"
+        outlined
+        clearable
+        @keyup.enter="handleAddTarefa"
+    ></v-text-field>
+    </v-col>
+
+      <v-list
+      flat
+      subheader
+    >
+      <v-subheader>To-Do</v-subheader>
+
+      <v-list-item-group
+        multiple
+        active-class=""
+      >
+        <div v-for="tarefa, index in tarefas"
+        :key="index"
+        >
+          <Tarefa 
+          :tarefa="tarefa"
+          />
+        </div>
+
+      </v-list-item-group>
+
+    
+    </v-list>
+  </div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  import Tarefa from '../components/tarefas/Tarefa.vue'
 
   export default {
     name: 'Home',
 
     components: {
-      HelloWorld,
+      Tarefa
     },
+    data(){
+      return{
+        campoInput:null,
+        tarefas:[ 
+          {titulo:"Ir ao mercado", concluido:false},
+          {titulo:"Comprar ração", concluido:false}, 
+        ]
+      }
+    },
+    methods:{
+      handleAddTarefa()
+      {
+          if(this.campoInput){
+            this.tarefas.push({
+              titulo:this.campoInput,
+              concluido:false
+            })
+            this.campoInput = null; 
+          }
+      }
+    }
   }
 </script>
